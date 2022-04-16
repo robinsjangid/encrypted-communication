@@ -116,4 +116,19 @@ class myThread(threading.Thread):
                 if (data != ""):
                     mess = ''
                     processed_data = process_bytes(data)
+# iterating processed_date from return of process_bytes method
+                #    for dat in processed_data
+
+
+
+
+                    for dat in processed_data:
+# decrypting with AES CRYPT
+
+
+                        decrypted = aes.decrypt(dat)
+                        for ch in decrypted:
+                            if(chr(ch)!='~'):
+                                mess+=str(chr(ch))
+                    try:
 
