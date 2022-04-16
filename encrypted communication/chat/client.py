@@ -117,3 +117,26 @@ class myThread(threading.Thread):
                         print('Unrecognised Data or Broken PIPE ')
             except ConnectionResetError:
                 print('Broken PIPE!')
+# creating a daemon thread and starting a thread
+Listening_Thread = myThread(1)
+Listening_Thread.daemon = True
+Listening_Thread.start()
+
+
+while 1:
+    try:
+        sending_data = str(input(""))
+    except KeyboardInterrupt:
+        s.close()
+        exit(-1)
+    if(sending_data=="quit()"):
+        Listening_Thread.stop()
+        s.close()
+        exit()
+    timestamp = str(datetime.now())[11:19]
+    mess_hash = hashlib.sha256(str(sending_data).encode('utf-8')).hexdigest()
+    send_data = {
+        "timestamp" : timestamp,
+        "message"   : sending_data,
+        "hash"      : mess_hash
+    }
