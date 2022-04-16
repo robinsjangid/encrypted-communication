@@ -100,3 +100,20 @@ class myThread(threading.Thread):
                 if (data != ""):
                     mess = ''
                     processed_data = process_bytes(data)
+# iterating processed_date from return of process_bytes method
+                #    for dat in processed_data
+# decrypting with AES CRYPT
+                        decrypted = aes.decrypt(dat)
+                        for ch in decrypted:
+                            if(chr(ch)!='~'):
+                                mess+=str(chr(ch))
+                    try:
+# Parsing json string and converting to Python dictionary
+                        data_recv = json.loads(mess)
+                        #message = str(data_recv['message'])
+                        verify_and_display(data_recv)
+#Handling exception
+                    except:
+                        print('Unrecognised Data or Broken PIPE ')
+            except ConnectionResetError:
+                print('Broken PIPE!')
