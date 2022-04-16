@@ -53,5 +53,38 @@ aes = pyaes.AES(hashed)
 
 
 def verify_and_display(recv_dict):
+    # Assigning 'timestamp','hash','message' from input parameter recv_dict and creating a secure
+    # hash algorithm using SHA256
+
+    timestamp = recv_dict['timestamp']
+    recv_hash = recv_dict['hash']
+    message = recv_dict['message']
+    mess_hash = hashlib.sha256(str(message).encode('utf-8')).hexdigest()
+    SET_LEN = 80
+    if (mess_hash == recv_hash):
+        tag = str('☑')
+    else:
+        tag = str('☒')
+    spaces = SET_LEN - len(str(message)) - len('Received : ') - 1
+    if spaces > 0:
+        space = ' ' * spaces
+        sentence = 'Received : ' + str(message) + space + tag + '  ' + timestamp
+        print(sentence)
+
+
+def process_bytes(bytess):
+    ret = []
+    while (len(bytess) >= 16):
+        if (len(bytess) >= 16):
+            byts = bytess[:16]
+            ret.append(byts)
+            bytess = bytess[16:]
+        else:
+            print("Block Size Mismatch ")
+    return ret
+
+
+def process_text(data):  # take data in as a string return 16 bytes block of bytes list
+    streams = []
 
 
