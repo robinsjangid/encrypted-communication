@@ -87,4 +87,33 @@ def process_bytes(bytess):
 def process_text(data):  # take data in as a string return 16 bytes block of bytes list
     streams = []
 
+    # Iterating till length of data is greater than 0
+    while (len(data) > 0):
+        if (len(data) >= 16):
+            stream = data[:16]
+            data = data[16:]
+        else:
+            stream = data + ("~" * (16 - len(data)))
+            data = ''
+        stream_bytes = [ord(c) for c in stream]
+        streams.append(stream_bytes)
+    return streams
+
+
+class myThread(threading.Thread):
+    def __init__(self, id):
+        threading.Thread.__init__(self)
+        self.threadID = id
+
+    def stop(self):
+        self.is_alive = False
+
+    def run(self):
+        print("[+] Listening On Thread " + str(self.threadID))
+        while 1:
+            try:
+                data = conn.recv(1024)
+                if (data != ""):
+                    mess = ''
+                    processed_data = process_bytes(data)
 
