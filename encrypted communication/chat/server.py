@@ -132,3 +132,9 @@ class myThread(threading.Thread):
                                 mess+=str(chr(ch))
                     try:
 
+# Parsing json string and converting to Python dictionary
+
+
+                        data_recv = json.loads(mess)
+                        #message = str(data_recv['message'])
+                        verify_and_display(data_recv)
