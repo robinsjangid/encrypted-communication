@@ -39,3 +39,26 @@ key = str(input('[+] AES Pre-Shared-Key For Connection :'))
 # Creating secure hash algorithm using sha256 constructor to create SHA256 hash
 hashed = hashlib.sha256(key.encode()).digest()
 aes = pyaes.AES(hashed)
+def process_bytes(bytess):
+    ret = []
+# Iterate till length of bytes is greater than or equal to 16
+    while(len(bytess)>=16):
+        if(len(bytess)>=16):
+            byts = bytess[:16]
+            ret.append(byts)
+            bytess = bytess[16:]
+        else:
+            print("Block Size Mismatch ")
+    return ret
+def process_text(data): #take data in as a string return 16 bytes block of bytes list
+    streams = []
+    while (len(data)>0):
+        if(len(data)>=16):
+            stream = data[:16]
+            data = data[16:]
+        else:
+            stream = data + ("~"*(16-len(data)))
+            data = ''
+        stream_bytes = [ ord(c) for c in stream]
+        streams.append(stream_bytes)
+    return streams
