@@ -31,3 +31,11 @@ try:
 
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((HOST, PORT))
+# Catching an exception
+except ConnectionError:
+    print('Could Not Connect !')
+    exit(-1)
+key = str(input('[+] AES Pre-Shared-Key For Connection :'))
+# Creating secure hash algorithm using sha256 constructor to create SHA256 hash
+hashed = hashlib.sha256(key.encode()).digest()
+aes = pyaes.AES(hashed)
