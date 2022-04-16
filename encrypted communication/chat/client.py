@@ -20,3 +20,14 @@ from datetime import datetime
 
 
 print("[+] Client Running ")
+#
+HOST = str(input('[+] Enter Destination IP   : '))
+PORT = int(input('[+] Enter Destination Port : '))
+try:
+# Creating socket instance
+# with input parameters AF_INETwhich refers to address family ipv4 and
+#SOCK_STREAM for connection oriented TCP protocol
+
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HOST, PORT))
