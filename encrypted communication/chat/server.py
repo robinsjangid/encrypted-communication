@@ -32,5 +32,18 @@ print("[+] Server Running ")
 print("[+] Allowing All Incoming Connections ")
 print("[+] PORT "+str(PORT))
 print("[+] Waiting For Connection...")
+# Creating socket instance
+# with input parameters AF_INETwhich refers to address family ipv4 and
+#SOCK_STREAM for connection oriented TCP protocol
+
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(1)
+conn, addr = s.accept()
+print('[+] Connected by ', addr)
+
+
+key = str(input('[+] AES Pre-Shared-Key for the Connection : '))
 
 
