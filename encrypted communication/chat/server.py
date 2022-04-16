@@ -172,3 +172,15 @@ while 1:
         "message"   : sending_data,
         "hash"      : mess_hash
     }
+# converting python object into an equivalent JSON object
+
+
+    send_json_string = json.dumps(send_data)
+    sending_bytes = process_text(send_json_string)
+    enc_bytes = []
+    for byte in sending_bytes:
+        ciphertext = aes.encrypt(byte)
+        enc_bytes += bytes(ciphertext)
+    #print("Sending : "+str(sending_data))
+    conn.send(bytes(enc_bytes))
+conn.close()
