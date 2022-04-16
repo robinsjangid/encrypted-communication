@@ -138,3 +138,10 @@ class myThread(threading.Thread):
                         data_recv = json.loads(mess)
                         #message = str(data_recv['message'])
                         verify_and_display(data_recv)
+# Handling exception
+                    except:
+                        print('Unrecognised Data or Broken PIPE ')
+            except ConnectionResetError:
+                print('Broken PIPE !')
+                exit(0)
+                self.stop()
