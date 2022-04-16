@@ -45,5 +45,13 @@ print('[+] Connected by ', addr)
 
 
 key = str(input('[+] AES Pre-Shared-Key for the Connection : '))
+# Creating secure hash algorithm using sha256 constructor to create SHA256 hash
+
+
+hashed = hashlib.sha256(key.encode()).digest()
+aes = pyaes.AES(hashed)
+
+
+def verify_and_display(recv_dict):
 
 
